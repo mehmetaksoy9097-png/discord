@@ -5,6 +5,7 @@ import asyncio
 import json
 import os
 from datetime import datetime, timedelta
+from typing import Optional
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -28,7 +29,7 @@ ID_EMOJI_URUN  = 1500382470724522104
 ID_EMOJI_SORU  = 1500099438838939650
 ID_EMOJI_SESLI = 1501664937917808802
 
-def e(emoji_id: int) -> discord.Emoji | None:
+def e(emoji_id: int) -> Optional[discord.Emoji]:
     return bot.get_emoji(emoji_id)
 
 DATA_FILE = "ticket_data.json"
@@ -77,7 +78,7 @@ bot = commands.Bot(command_prefix="z!", intents=intents)
 
 # Modal: Kategori düzenle / yeni kategori oluştur
 class KategoriModal(discord.ui.Modal):
-    def __init__(self, mevcut: dict | None = None):
+    def __init__(self, mevcut: Optional[dict] = None):
         baslik = "Kategoriyi Düzenle" if mevcut else "Yeni Kategori Oluştur"
         super().__init__(title=baslik)
         self.mevcut = mevcut
